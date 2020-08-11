@@ -30,7 +30,7 @@ namespace TopKala3.Controllers
             ViewBag.Grand = Grand;
 
             var Product1 = await _db.Products.Include(a => a.productPathImages).Include(a => a.productColors)
-                .Include(a=>a.Brands)
+              
                 .Include(a => a.properties)
                 .Include(a => a.productAttributes)
                 .Include(a => a.Category)

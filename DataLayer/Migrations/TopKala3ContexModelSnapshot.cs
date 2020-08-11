@@ -290,7 +290,7 @@ namespace DataLayer.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
-                    b.Property<int>("BrandId")
+                    b.Property<int?>("BrandId")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
@@ -683,9 +683,7 @@ namespace DataLayer.Migrations
                 {
                     b.HasOne("DataLayer.Brand", "Brands")
                         .WithMany("Products")
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("BrandId");
 
                     b.HasOne("DataLayer.Category", "Category")
                         .WithMany("products")

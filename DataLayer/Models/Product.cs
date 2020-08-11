@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DataLayer
@@ -65,8 +66,9 @@ namespace DataLayer
 
 
         [Display(Name = "برند")]
-        public int BrandId { get; set; }
-        public Brand Brands { get; set; }
+        public int? BrandId { get; set; }
+       
+        public  Brand Brands { get; set; }
 
 
 
