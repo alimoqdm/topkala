@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewData["Title"] = "CreateImage";
+}
+<div class="card m-3 text-right fontiran ">
+    <form method="post" asp-action="CreateImage" asp-route-id="@ViewBag.product" enctype="multipart/form-data">
+
+        <div class="card-header">
+            ایجاد عکس
+        </div>
+        <div class="card-body card-frm ">
+
+            <div class="form-group row card-subFrm ">
+                <input name="Model[0].ProductId" type="hidden" value="@ViewBag.product" />
+                <div class="col-12 col-lg-2">
+                    <label>تصویر</label>
+                </div>
+                <div class="col-12 col-lg-10 mb-2">
+                    <input type="file" name="Model[0].Photo" class="form-control border-Cus" />
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="m-2 text-muted">
+            <div class=" row">
+                <div class="col-6 col-lg-2">
+                    <div class="form-group">
+                        <input type="submit" value="ایجاد" class="btn btn-primary btn-block" />
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <div class="form-group">
+                        <a id="AddMore" class="btn btn-success text-white btn-block">اضافه کردن </a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2 RmvInput">
+                    <div class="form-group">
+                        <a id="RemoveElmnt" class="btn btn-danger text-white btn-block">حذف کردن </a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <div class="form-group">
+                        <a asp-action="ImageList" asp-route-id="@ViewBag.product" class="btn btn-block text-white" style="background-color:#4531ba">برگشت </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+</div>
+
+
+
+<div hidden id="AddForm">
+
+    <div class="form-group mt-3 row card-subFrm ">
+        <input name="Model[0].ProductId" type="hidden" value="@ViewBag.product" />
+        <div class="col-12 col-lg-2">
+            <label>تصویر</label>
+        </div>
+        <div class="col-12 col-lg-10 mb-2">
+            <input type="file" name="Model[#].Photo" class="form-control border-Cus" />
+
+        </div>
+
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+        var count = 1;
+         $(".RmvInput").hide();
+        $("#AddMore").click(function (e) {
+            e.preventDefault();
+
+            var formContent = $("#AddForm");
+            var Content = formContent.html().replace(/#/g, count);
+
+
+            $(".card-frm").append(Content);
+            count++;
+
+
+        if (count >= 2) {
+            $(".RmvInput").show(500);
+        }
+        else {
+              $(".RmvInput").hide();
+        }
+        });
+
+         $("#RemoveElmnt").click(function (e) {
+             e.preventDefault();
+             $('.card-frm').children('.card-subFrm').last().remove();
+
+             count--;
+
+
+        if (count >= 2) {
+            $(".RmvInput").show(500);
+        }
+        else {
+              $(".RmvInput").hide();
+        }
+        });
+
+
+    </script>
+
+
+
+}
+
+<style>
+    .border-Cus {
+        border: 0px solid #8F8F8F;
+    }
+</style>

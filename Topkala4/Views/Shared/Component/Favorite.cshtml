@@ -1,0 +1,43 @@
+﻿@model IEnumerable<DataLayer.ShowUserOrderViewModel>
+
+    <div class="col-12">
+
+        @foreach (var item in Model)
+        {
+            <div class="profile-recent-fav-row">
+                <a href="#" class="profile-recent-fav-col profile-recent-fav-col-thumb">
+                    <img src="~/ProductImages/@item.ImageName">
+                </a>
+                <div class="profile-recent-fav-col profile-recent-fav-col-title">
+                    <a href="#">
+                        <h4 class="profile-recent-fav-name">
+                            @item.Title
+                        </h4>
+                    </a>
+                    @if (item.PriceReduction != 0)
+                    {
+                        <div class="profile-recent-fav-price">@item.PriceReduction هزار تومان</div>
+
+                    }
+                    else
+                    {
+                        <div class="profile-recent-fav-price">@item.Price هزار تومان</div>
+                    }
+                </div>
+                <div class="profile-recent-fav-col profile-recent-fav-col-actions">
+                    <a href="/UserLikeProduct/@item.ProductID/false">
+                        <button class="btn-action btn-action-remove">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        }
+
+       
+    </div>
+    <div class="col-12 text-center">
+        <a asp-action="favorites" asp-controller="Account" asp-area="identity" class="btn-link-border form-account-link">
+            مشاهده و ویرایش لیست مورد علاقه
+        </a>
+    </div>

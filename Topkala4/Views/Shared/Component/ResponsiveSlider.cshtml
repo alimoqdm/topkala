@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DataLayer.AmazingSliderViewModel>
+
+
+
+<div class="row" id="amazing-slider-responsive"  >
+    <div class="col-12" >
+        <div class="widget widget-product card" >
+            <header class="card-header">
+                <img src="assets/img/amazing-slider/amazing-title-01.png" width="150px" alt="">
+            
+            </header>
+            <div class="product-carousel owl-carousel owl-theme">
+                @foreach (var item in Model)
+                {
+                <div class="item">
+                    <a asp-area="" asp-action="Product" asp-controller="Product" asp-route-id="@item.ProductID" asp-route-Name="@item.Name"
+                                                       asp-route-Parent="@item.Parent" asp-route-Grand="@item.Grand">
+                        <img src="~/ProductImages/@item.ProductImage"
+                             class="img-fluid" alt="">
+                    </a>
+                    <h2 class="post-title">
+                        <a asp-area="" asp-action="Product" asp-controller="Product" asp-route-id="@item.ProductID" asp-route-Name="@item.Name"
+                                                       asp-route-Parent="@item.Parent" asp-route-Grand="@item.Grand">@item.ProductName</a>
+                    </h2>
+                    <div class="price ">
+                        <del><span>@item.ProductPrice.ToString("0,#")<span>تومان</span></span></del>
+                        <ins><span>@item.PriceReduction.ToString("0,#")<span>تومان</span></span></ins>
+                       
+                    </div>
+                   
+                </div>
+                }
+
+              
+            </div>
+        </div>
+    </div>
+</div>

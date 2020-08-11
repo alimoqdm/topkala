@@ -1,0 +1,27 @@
+﻿@model IEnumerable<DataLayer.AttGroupViewModel>
+
+@foreach (var item in Model)
+{
+
+<section class="col-md-12">
+
+    <h3 class="params-title">@item.GroupName</h3>
+    <ul class="params-list">
+        @foreach (var item2 in item.Attr)
+        {
+            <li class="d-flex flex-wrap" style="background-color:#F0F0F1; padding:8px ">
+                <div class="params-list-key" >
+                    <span class="block" >@item2.TITLE</span>
+                </div>
+                <div class="params-list-value" style="text-overflow:clip ">
+                    <span class="block" >
+                       @item2.VALUE
+                    </span>
+                </div>
+            </li>
+        }
+
+       
+    </ul>
+</section>
+}

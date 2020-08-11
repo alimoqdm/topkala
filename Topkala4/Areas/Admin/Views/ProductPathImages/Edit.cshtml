@@ -1,0 +1,61 @@
+﻿@model DataLayer.ProductPathImage
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+    <div class="card m-3 text-right fontiran ">
+        <form asp-action="Edit" asp-route-ProductId="@ViewBag.ProductId"enctype="multipart/form-data">
+
+            <div class="card-header">
+                ویرایش عکس ها
+            </div>
+            <div class="card-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ProductId" value="@ViewBag.ProductId" />
+                <input type="hidden" asp-for="MyProperty" />
+                <div class="form-group row">
+                    <div class="col-12 col-lg-1">
+                        <label asp-for="ImagePath"></label>
+                    </div>
+                    <div class="col-12 col-lg-5" style="max-width:300px;">
+                        <img src="~/ProductImages/@Model.ImagePath" class="img-thumbnail img-fluid"    />
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <input type="file" name="ImgsUp"  class="form-control border-Cus" />
+                        <span asp-validation-for="ImagePath" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card-footer text-muted">
+                <div class=" row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary btn-block" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <a asp-action="ImageList" asp-route-id="@ViewBag.ProductId" class="btn btn-success btn-block">Back </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<style>
+    .border-Cus {
+        border: 0px solid #8F8F8F;
+    }
+</style>

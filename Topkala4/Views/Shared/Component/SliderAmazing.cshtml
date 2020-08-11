@@ -1,0 +1,62 @@
+﻿@model List<DataLayer.AmazingSliderViewModel>
+
+<div class="row m-0" style="max-height:400px">
+    <ol class="carousel-indicators pr-0 d-flex flex-column col-lg-3">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <li class="" data-target="#amazing-slider" data-slide-to="@i">
+                <span>@Model[i].ProductName</span>
+            </li>
+        }
+
+
+
+
+        <li class="view-all">
+            <a href="#" class="btn btn-primary btn-block hvr-sweep-to-left">
+                <i class="fa fa-arrow-left"></i>محصولات شگفت انگیزها
+            </a>
+        </li>
+    </ol>
+    <div class="carousel-inner p-0 col-12 col-lg-9" >
+        <img class="amazing-title" src="/img/amazing-slider/amazing-title-01.png"
+             alt="">
+        @foreach (var item in Model)
+        {
+            <div class="carousel-item @(item == Model.First() ? "active" : "")">
+                <div class="row m-0">
+                    <div class="right-col col-5 d-flex align-items-center" style="margin-bottom:50px">
+                        <a class="w-100 text-center " asp-area="" asp-action="Product" asp-controller="Product" asp-route-id="@item.ProductID" asp-route-Name="@item.Name"
+                                                       asp-route-Parent="@item.Parent" asp-route-Grand="@item.Grand">
+                            <img src="~/ProductImages/@item.ProductImage"
+                                 class="img-fluid" alt="" width="300" height="300">
+                        </a>
+                    </div>
+                    <div class="left-col col-7">
+                        <div class="price">
+                            <del><span>@item.ProductPrice.ToString("0,#")<span>تومان</span></span></del>
+                            <ins><span>@item.PriceReduction.ToString("0,#")<span>تومان</span></span></ins>
+                            <span class="discount-percent">@item.REduction % تخفیف</span>
+                        </div>
+                        <h2 class="product-title">
+                            <a asp-area="" asp-action="Product" asp-controller="Product" asp-route-id="@item.ProductID" asp-route-Name="@item.Name"
+                                                       asp-route-Parent="@item.Parent" asp-route-Grand="@item.Grand"> @item.ProductName </a>
+                        </h2>
+                        <ul class="list-group">
+
+                            @foreach (var item1 in item.Propertiess)
+                            {
+                                <li class="list-group-item">@item1.Title: @item1.Value</li>
+                            }
+
+                        </ul>
+                        <hr />
+                       
+                    </div>
+                </div>
+            </div>
+        }
+
+      
+    </div>
+</div>

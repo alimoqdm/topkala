@@ -1,0 +1,410 @@
+﻿
+@model DataLayer.ProductViewModel
+@inject SignInManager<ApplicationUser> signInManager
+
+@{
+    ViewData["Title"] = "UserProduct";
+}
+
+<style>
+    .parent-expert *{
+         max-width:100%;
+    }
+</style>
+
+
+<main class="single-product default" style="margin-top: 10px">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#"><span>فروشگاه اینترنتی تاپ کالا</span></a>
+                        </li>
+
+                        <li>
+                            <a href="#"><span>@ViewBag.Name</span></a>
+                        </li>
+                        <li>
+                            <span> @Model.Name </span>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <article class="product">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="product-gallery default">
+                                <img class="zoom-img" id="img-product-zoom" src="/ProductImages/@Model.FristImage" data-zoom-image="/ProductImages/@Model.FristImage" width="411" />
+
+                                <div id="gallery_01f" style="width:500px;float:left;">
+                                    <ul class="gallery-items">
+                                        @foreach (var item in Model.Images)
+                                        {
+                                            <li>
+                                                <a href="#" class="elevatezoom-gallery " data-update="" data-image="/ProductImages/@item.ImagePath" data-zoom-image="/ProductImages/@item.ImagePath">
+                                                    <img src="/ProductImages/@item.ImagePath" width="100" />
+                                                </a>
+                                            </li>
+                                        }
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <ul class="gallery-options">
+                                <li>
+                                    <button id="buttonLike" class="add-favorites"><i class="fa fa-heart"></i></button>
+                                    @if (signInManager.IsSignedIn(User))
+                                    {
+                                        <span class="tooltip-option">افزودن به علاقمندی</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="tooltip-option">ابتدا ثبت نام کنید</span>
+
+                                    }
+                                </li>
+                                <li>
+                                    <button data-toggle="modal" data-target="#myModal"><i class="fa fa-share-alt"></i></button>
+                                    <span class="tooltip-option">اشتراک گذاری</span>
+                                </li>
+                            </ul>
+                            <!-- Modal Core -->
+                            <div class="modal-share modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">اشتراک گذاری</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-share">
+                                                <div class="form-share-title">اشتراک گذاری در شبکه های اجتماعی</div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <ul class="btn-group-share">
+                                                            <li><a href="#" class="btn-share btn-share-twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                                            <li><a href="#" class="btn-share btn-share-facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                                            <li><a href="#" class="btn-share btn-share-google-plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="form-share-title">ارسال به ایمیل</div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <label class="ui-input ui-input-send-to-email">
+                                                            <input class="ui-input-field" type="email" placeholder="آدرس ایمیل را وارد نمایید.">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <button class="btn-primary">ارسال</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form class="form-share-url default">
+                                                <div class="form-share-url-title">آدرس صفحه</div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <label class="ui-url">
+                                                            <input class="ui-url-field" value="https://www.digikala.com">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal Core -->
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="product-title default">
+                                <h1>
+                                    @Model.Name
+                                    @if (Model.EngName != null)
+                                    {
+                                        <span>@Model.EngName</span>
+                                    }
+                                </h1>
+                            </div>
+                            <div class="product-directory default">
+                                <ul>
+                                    <li>
+                                        <span>برند</span>
+                                        <span class="product-brand-title">@Model.Brand </span>
+                                    </li>
+                                    <li>
+                                        <span>دسته‌بندی</span> :
+                                        <a href="#" class="btn-link-border">
+                                            @Model.Category
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            @if (ViewBag.Color)
+                            {
+                                <div class="product-variants default  ">
+
+                                    <span> رنگ: </span>
+                                    <span>@ViewBag.Color </span>
+
+
+                                </div>
+                            }
+
+
+
+
+                            <div class="product-guarantee default">
+                                <i class="fa fa-check-circle"></i>
+                                <p class="product-guarantee-text">گارانتی اصالت و سلامت فیزیکی کالا</p>
+                            </div>
+                            <div class="product-delivery-seller default">
+                                <p>
+                                    <i class="now-ui-icons shopping_shop"></i>
+                                    <span>فروشنده:‌</span>
+                                    <a href="#" class="btn-link-border">تاپ کالا</a>
+                                </p>
+                            </div>
+                            <div class="price-product defualt">
+                                @if (Model.Special)
+                                {
+                                    <div class="price-value">
+                                        <del>
+                                            <span style="color:black"> @Model.Price.ToString("0,#")</span>
+
+                                            <span style="color:black" class="price-currency">تومان</span>
+                                        </del>
+                                    </div>
+                                    <div class="price-discount" data-title="تخفیف">
+                                        <span>
+
+                                            @Model.Reduction
+                                        </span>
+                                        <span>%</span>
+
+                                    </div>
+                                    <div class="price-value">
+                                        <span>@Model.PriceWithReduction.ToString("0,#")</span>
+                                        <span class="price-currency">تومان</span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="price-value">
+
+                                        <span> @Model.Price.ToString("0,#")</span>
+
+                                        <span class="price-currency">تومان</span>
+                                    </div>
+                                    <div class="price-discount" data-title="تخفیف">
+                                        <span>
+                                            ۰
+                                        </span>
+                                        <span>%</span>
+                                    </div>
+                                }
+                            </div>
+                            <div class="product-add default">
+                                <div class="parent-btn">
+                                    <a href="/Orders/ShowOrder" class="dk-btn dk-btn-info">
+                                        رفتن به سبد خرید
+                                        <i class="now-ui-icons shopping_cart-simple"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 center-breakpoint">
+                            <div class="product-guaranteed default">
+                                بیش از ۱۸۰ نفر از خریداران این محصول را پیشنهاد داده‌اند
+                            </div>
+                            <div class="product-params default">
+                                <ul data-title="ویژگی‌های محصول">
+                                    @foreach (var item in Model.Propertiess)
+                                    {
+                                        <li>
+                                            <span> @item.Title: </span>
+                                            <span> @item.Value  </span>
+                                        </li>
+                                    }
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="col-12 default no-padding">
+                    <div class="product-tabs default">
+                        <div class="box-tabs default">
+                            <ul class="nav" role="tablist">
+                                <li class="box-tabs-tab">
+                                    <a class="active" data-toggle="tab" href="#desc" role="tab" aria-expanded="true">
+                                        <i class="now-ui-icons objects_umbrella-13"></i> نقد و بررسی
+                                    </a>
+                                </li>
+                                <li class="box-tabs-tab">
+                                    <a data-toggle="tab" href="#params" role="tab" aria-expanded="false">
+                                        <i class="now-ui-icons shopping_cart-simple"></i> مشخصات
+                                    </a>
+                                </li>
+                                <li class="box-tabs-tab">
+                                    <a data-toggle="tab" href="#comments" role="tab" aria-expanded="false">
+                                        <i class="now-ui-icons shopping_shop"></i> نظرات کاربران
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <div class="card-body default">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="desc" role="tabpanel" aria-expanded="true">
+                                        <article>
+                                            <h2 class="param-title">
+                                                نقد و بررسی تخصصی
+                                                <span> @Model.Name </span>
+                                            </h2>
+                                            <div class="parent-expert default">
+                                                @Html.Raw(Model.Review)
+                                            </div>
+
+
+
+                                        </article>
+                                    </div>
+                                    <div class="tab-pane params" id="params" role="tabpanel" aria-expanded="false">
+                                        <article>
+                                            <h2 class="param-title">
+                                                مشخصات فنی
+                                                <span>@Model.Name</span>
+                                            </h2>
+                                            @await Component.InvokeAsync("AttributeViewComponent", new { id = Model.id })
+                                        </article>
+                                    </div>
+                                    <div class="tab-pane" id="comments" role="tabpanel" aria-expanded="false">
+                                        <article>
+                                            <h2 class="param-title">
+                                                نظرات کاربران
+                                                <span id="Count">  @Model.CommentCount نظر</span>
+
+                                            </h2>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <div class="tab-pane form-comment" aria-expanded="false">
+                                                    <h2 class="param-title">
+                                                        افزودن نظر
+                                                        <span>نظر خود را در مورد محصول مطرح نمایید</span>
+                                                    </h2>
+                                                    <form class="comment form-comment" method="get">
+                                                        <input id="ID" type="hidden" value="@Model.id" />
+                                                        <textarea id="Txt" class="form-control" placeholder="نظر" rows="5"></textarea>
+                                                        <input onclick="addComment()" type="button" class="btn btn-default" value="ارسال نظر" />
+                                                    </form>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="alert" style="background-color:#D4EDDA">
+                                                    <p>کاربر گرامی برای درج نظر ابتدا وارد <a href="/Account/Login">سایت</a> شوید </p>
+                                                </div>
+                                            }
+
+                                            <div class="comments-area default">
+                                                <ol id="Cmlist" class="comment-list">
+                                                    @await Component.InvokeAsync("ShowComment", new { id = Model.id })
+                                                </ol>
+                                            </div>
+                                        </article>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts
+{
+    <script src="/js/plugins/jquery.ez-plus.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        function Addm() {
+            alert("hi");
+        }
+
+        function addComment() {
+            var comment = $("#Txt").val();
+            var id = $("#ID").val();
+            $.ajax({
+
+                url: '/Product/AddComment/' + id,
+                type: 'GET',
+                data: { comment: comment }
+
+            }).done(function (res) {
+
+                $("#Cmlist").html(res);
+                $("#Txt").val(" ");
+
+                $.ajax({
+
+                    url: '/Product/CountCm/' + id,
+                    type: 'GET',
+                }).done(function (res) {
+
+                    $("#Count").html(res);
+
+                });
+
+
+            });
+
+        }
+
+
+                jQuery.fn.clickToggle = function(a,b) {
+  var ab = [b,a];
+  return this.on("click", function(){ ab[this._tog^=1].call(this); });
+};
+
+        $("#buttonLike").clickToggle(function() {
+      $.ajax({
+
+                    url: '/UserLikeProduct/'+@Model.id+'/true',
+                    type: 'GET',
+
+                });
+}, function() {
+     $.ajax({
+
+                    url: '/UserLikeProduct/'+@Model.id+'/false',
+                    type: 'GET',
+
+                });
+});
+
+    </script>
+
+
+}
+
+

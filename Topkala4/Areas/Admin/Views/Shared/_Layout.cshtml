@@ -1,0 +1,121 @@
+﻿
+
+<html lang="en" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ادمین</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="~/css/adminstyle.css">
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"
+            integrity="sha256-nZaxPHA2uAaquixjSDX19TmIlbRNCOrf5HO1oHl5p70=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css"
+          integrity="sha256-IvM9nJf/b5l2RoebiFno92E5ONttVyaEEsdemDC6iQA=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css" />
+   
+
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <aside id="sidebar-wrapper">
+            <div class="sidebar-brand">
+                <h2 class="pb-3">پنل مدیریت</h2>
+
+            </div>
+            <ul class="sidebar-nav">
+                <li class="">
+                    <a href="/Admin/Home/indexAdmin" class="text-white a-link">
+                        <i class="fas fa-home "
+                           style="margin-right: -3px;"></i>داشبورد
+                    </a>
+                </li>
+                <li>
+                    <a href="/Admin/Categories/index" class="text-white a-link "><i class="fas fa-layer-group"></i>دسته بندی</a>
+                </li>
+                <li>
+                    <a href="/Admin/CreateProduct/Create" class="text-white a-link"><i class="fas fa-crop"></i>ایجاد محصول</a>
+                </li>
+                <li>
+                    <a href="/Admin/Products/Index" class="text-white a-link"><i class="fas fa-store"></i>محصولات</a>
+                </li>
+                <li>
+                    <a href="/Admin/Brands/Index" class="text-white a-link"><i class="fas fa-braille"></i>ایجاد برند</a>
+                </li>
+                <li>
+                    <a href="/Admin/AttributeGroups/Index" class="text-white a-link"><i class="fas fa-tasks"></i>گروه مشخصات</a>
+                </li>
+                <li>
+                    <a href="/Admin/Attributees/Index" class="text-white a-link"><i class="fas fa-chart-bar"></i>مشخصات</a>
+                </li>
+                <li>
+                    <a href="/Admin/SilderImages/Index" class="text-white a-link"><i class="fas fa-camera"></i>اسلایدر</a>
+                </li>
+                <li>
+                    <a href="/identity/Administration/ListRoles" class="text-white a-link"><i class="fas fa-user-tag"></i>مدیریت نقش ها</a>
+                </li>
+                <li>
+                    <a href="/identity/Administration/ListUsers" class="text-white a-link"><i class="fas fa-users"></i>مدیریت کاربران </a>
+                </li>
+
+
+            </ul>
+        </aside>
+
+        <div id="navbar-wrapper">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a href="#" class="navbar-brand a-link" id="sidebar-toggle"><i class="fa fa-bars"></i></a>
+
+                    </div>
+
+
+                </div>
+            </nav>
+        </div>
+
+
+        @RenderBody()
+
+
+    </div>
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/javascript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
+
+
+
+    <script src="https://kit.fontawesome.com/e19c476714.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+
+
+</body>
+
+</html>
+
+
+

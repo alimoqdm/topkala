@@ -1,0 +1,77 @@
+﻿
+@model DataLayer.AttributeViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <div class="card m-3 text-right fontiran ">
+        <form id="AttributeForm" method="post">
+
+            <div class="card-header">
+                ایجاد مشخصات
+            </div>
+            <div class="card-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @for (var i = 0; i < Model.Att.Count(); i++)
+                {
+                    <div class="form-group row">
+                        <input asp-for="@Model.ProductID" class="form-control" value="@Model.ProductID" type="hidden" />
+                        <input asp-for="@Model.AttributeID[i]" class="form-control" value="@Model.AttributeID[i]" type="hidden" />
+                        <div class="col-12 col-lg-2">
+                            <label>@Model.Att[i]</label>
+                        </div>
+                        <div class="col-12 col-lg-10">
+                            <input asp-for="@Model.Val[i]" class="form-control" />
+
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="card-footer text-muted">
+                <div class=" row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input onclick="AddProp()" type="submit" value="Create" class="btn btn-primary btn-block" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <a asp-controller="CreateProduct" asp-action="Next" asp-route-id="@Model.ProductID" class="btn btn-success btn-block">Back </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+
+
+
+@section Scripts
+{
+    <script>
+
+        function AddProp() {
+            var attributes = $("#AttributeForm").serializeArray();
+
+            $.ajax({
+                url: '/Admin/CreateProductAttribute/Attribute',
+                type: 'POST',
+                async: true,
+                data: { attributes: attributes },
+                contentType: 'application/json; charset=utf-8'
+
+            }).done(function (res) {
+                console.log(res);
+            });
+        };
+
+    </script>
+
+
+}
+
+

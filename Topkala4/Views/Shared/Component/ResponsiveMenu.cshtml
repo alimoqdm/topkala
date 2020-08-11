@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DataLayer.Category>
+
+
+
+<ul class="navbar-nav default">
+    @foreach (var menuLevel1 in Model.Where(a => a.Level == Level.Level1))
+    {
+        <li id="test" class="sub-menu ">
+            <a  id="ListMenu" href="#">@menuLevel1.Name</a>
+            @if (menuLevel1.Categories.Count() > 0)
+            {
+                <ul>
+                    @foreach (var menuLevel2 in menuLevel1.Categories)
+                    {
+                        <li class="sub-menu " > 
+
+                            <a id="ListMenu" href="/Search/@menuLevel2.CategoryId"> @menuLevel2.Name</a>
+                            
+                          
+                        <ul>
+                            <h6> <a id="ListMenu" href="/Search/@menuLevel2.CategoryId"> @menuLevel2.Name</a></h6>
+                            @foreach (var menuLevel3 in menuLevel2.Categories)
+                            {
+                                <li>
+                                    <a id="ListMenu" href="/Search/@menuLevel3.CategoryId">@menuLevel3.Name</a>
+                                </li>
+
+                            }
+                        </ul>
+                            
+                        </li>
+
+
+
+
+                    }
+                </ul>
+            }
+        </li>
+
+
+    }
+</ul>
+
+
+
+<style>
+    #ListMenu{
+        /*color:#5ec094;*/
+        color:#3a393c;
+    }
+
+  
+</style>
+
+
+
+

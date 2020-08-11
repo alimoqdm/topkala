@@ -1,0 +1,424 @@
+﻿/*--Telegram Channel : @Web_Pixel--*/
+
+@font-face {
+    font-family: iranyekan;
+    font-style: normal;
+    font-weight: bold;
+    src: url('../fonts/iranyekan/eot/iranyekanwebbold(fanum).eot'),
+    /* IE6-8 */
+    url('../fonts/iranyekan/woff2/iranyekanwebbold(fanum).woff2') format('woff2'),
+    /* FF39+,Chrome36+, Opera24+*/
+    url('../fonts/iranyekan/woff/iranyekanwebbold(fanum).woff') format('woff'),
+    /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/iranyekan/ttf/iranyekanwebbold(fanum).ttf') format('truetype');
+}
+
+@font-face {
+    font-family: iranyekan;
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/iranyekan/eot/iranyekanweblight(fanum).eot');
+    src: url('../fonts/iranyekan/eot/iranyekanweblight(fanum).eot?#iefix') format('embedded-opentype'),
+    /* IE6-8 */
+    url('../fonts/iranyekan/woff2/iranyekanweblight(fanum).woff2') format('woff2'),
+    /* FF39+,Chrome36+, Opera24+*/
+    url('../fonts/iranyekan/woff/iranyekanweblight(fanum).woff') format('woff'),
+    /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/iranyekan/ttf/iranyekanweblight(fanum).ttf') format('truetype');
+}
+
+@font-face {
+    font-family: iranyekan;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/iranyekan/eot/iranyekanwebregular(fanum).eot');
+    src: url('../fonts/iranyekan/eot/iranyekanwebregular(fanum).eot?#iefix') format('embedded-opentype'),
+    /* IE6-8 */
+    url('../fonts/iranyekan/woff2/iranyekanwebregular(fanum).woff2') format('woff2'),
+    /* FF39+,Chrome36+, Opera24+*/
+    url('../fonts/iranyekan/woff/iranyekanwebregular(fanum).woff') format('woff'),
+    /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/iranyekan/ttf/iranyekanwebregular(fanum).ttf') format('truetype');
+}
+
+
+body {
+    padding-bottom: 30px;
+    position: relative;
+    min-height: 100%;
+    background-color: #eee;
+    font-family: iranyekan;
+}
+
+html,
+body {
+    overflow-x: hidden
+}
+
+.a-link {
+    transition: background 0.2s, color 0.2s;
+}
+
+    .a-link:hover,
+    .a-link:focus {
+        text-decoration: none;
+    }
+
+#wrapper {
+    padding-right: 0;
+    transition: all 0.5s ease;
+    position: relative;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    right: 250px;
+    width: 0;
+    height: 100%;
+    margin-right: -250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .8)), url("../img2/blue-green-plant-leaves-garden_73485-3208.JPG") no-repeat fixed center/cover;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+.sidebar-brand {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    text-align: center;
+    padding: 20px 0;
+}
+
+    .sidebar-brand h2 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 24px;
+        color: #fff;
+        border-bottom: 2px groove #eee;
+        font-family: iranyekan;
+    }
+
+.sidebar-nav {
+    position: absolute;
+    top: 75px;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+    .sidebar-nav > li {
+        text-indent: 10px;
+        line-height: 42px;
+        font-family: iranyekan;
+    }
+
+        .sidebar-nav > li a {
+            display: block;
+            text-decoration: none;
+            color: #757575;
+            font-weight: 300;
+            font-size: 18px;
+        }
+
+        .sidebar-nav > li > a:hover,
+        .sidebar-nav > li.active > a {
+            text-decoration: none;
+            color: #fff;
+            background: rgb(221, 102, 66);
+        }
+
+        .sidebar-nav > li > a i.fas {
+            font-size: 17px;
+            width: 60px;
+        }
+
+#navbar-wrapper {
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+}
+
+#wrapper.toggled #navbar-wrapper {
+    position: absolute;
+    margin-left: -250px;
+}
+
+#navbar-wrapper .navbar {
+    border-width: 0 0 0 0;
+    background-image: linear-gradient( to left, #03001e, #7303c0,#ec38bc);
+    font-size: 24px;
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+#sidebar-toggle {
+    margin-right: -15px;
+}
+
+#navbar-wrapper .navbar a {
+    color: #eee;
+}
+
+    #navbar-wrapper .navbar a:hover {
+        color: #fff;
+    }
+
+#content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 4px;
+    top: 100px;
+    text-overflow: hidden;
+}
+
+#wrapper.toggled #content-wrapper {
+    position: absolute;
+    margin-left: -250px;
+}
+
+@media (min-width: 992px) {
+    #wrapper {
+        padding-right: 250px;
+    }
+
+        #wrapper.toggled {
+            padding-right: 60px;
+        }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 60px;
+    }
+
+    #wrapper.toggled #navbar-wrapper {
+        position: absolute;
+        margin-left: -190px;
+    }
+
+    #wrapper.toggled #content-wrapper {
+        position: absolute;
+        margin-left: -190px;
+    }
+
+    #navbar-wrapper {
+        position: relative;
+    }
+
+    #content-wrapper {
+        position: relative;
+        top: 0;
+    }
+
+    #wrapper.toggled #navbar-wrapper,
+    #wrapper.toggled #content-wrapper {
+        position: relative;
+        margin-left: 60px;
+    }
+}
+
+@media (min-width: 850px) and (max-width: 991px) {
+    #wrapper {
+        padding-right: 60px;
+    }
+
+    #sidebar-wrapper {
+        width: 60px;
+    }
+
+    #wrapper.toggled #navbar-wrapper {
+        position: absolute;
+        margin-left: -250px;
+    }
+
+    #wrapper.toggled #content-wrapper {
+        position: absolute;
+        margin-left: -250px;
+    }
+
+    #navbar-wrapper {
+        position: relative;
+    }
+
+    #wrapper.toggled {
+        padding-right: 250px;
+    }
+
+    #content-wrapper {
+        position: relative;
+        top: 0;
+    }
+
+    #wrapper.toggled #navbar-wrapper,
+    #wrapper.toggled #content-wrapper {
+        position: relative;
+        margin-left: 250px;
+    }
+}
+
+@media (max-width: 767px) {
+    #wrapper {
+        padding-right: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 0;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #navbar-wrapper {
+        position: absolute;
+        margin-left: -250px;
+    }
+
+    #wrapper.toggled #content-wrapper {
+        position: absolute;
+        margin-left: -250px;
+    }
+
+    #navbar-wrapper {
+        position: relative;
+    }
+
+    #wrapper.toggled {
+        padding-right: 250px;
+    }
+
+    #content-wrapper {
+        position: relative;
+        top: 0;
+    }
+
+    #wrapper.toggled #navbar-wrapper,
+    #wrapper.toggled #content-wrapper {
+        position: relative;
+        margin-left: 250px;
+    }
+
+    .serach-txt2 {
+        border: 2px solid #eee;
+    }
+}
+
+
+.sidebar-nav {
+    text-align: right;
+}
+
+
+
+/* carts */
+.a-for-decoration:hover,
+.a-for-decoration:focus {
+    text-decoration: none;
+    text-align: center;
+}
+
+.card-common {
+    box-shadow: 2px 4px 7px #999;
+    transition: all .5s;
+    font-family: iranyekan;
+}
+
+    .card-common:hover {
+        box-shadow: 5px 8px 15px #999;
+        transform: translateY(-2px);
+    }
+/* carts */
+
+
+
+
+
+/* chat */
+#chatR {
+    font-family: iranyekan;
+}
+
+.border-card-header {
+    border-top: 3px groove #3A016E;
+}
+
+.btn-border {
+    border-radius: 50px;
+    color: red;
+}
+
+.fontiran {
+    font-family: iranyekan;
+}
+
+.chatrom {
+    overflow-y: scroll;
+    max-height: 350px;
+}
+
+.chat_image {
+    border-radius: 50px;
+}
+
+.chat-massage {
+    background-color: #D2D6DE;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.margin-massage {
+    margin-right: -35px;
+}
+/* end chat */
+
+
+
+
+/* Searchbar */
+.serach-txt2 {
+    background: transparent;
+    outline: none;
+    border: 2px solid #870CBF;
+    padding-right: 10px;
+    color: whitesmoke;
+    font-size: 16px;
+    transition: 0.4s;
+    transition: 0.4s;
+    line-height: 25px;
+    border-radius: 10px;
+}
+
+#demo {
+    padding: 0;
+    margin-right: 1px;
+}
+
+
+
+/* end searchbar */
+
+
+/* drop down */
+#dropdown-container {
+    display: none;
+    padding-right: 60px;
+}
+
+.tt {
+    width: 100%;
+    height: 100%;
+    clip-path: ellipse(94% 76% at 89% 20%);
+    background-color: rosybrown;
+}
+
+
+/* end dropdown */

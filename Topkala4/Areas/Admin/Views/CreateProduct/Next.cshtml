@@ -1,0 +1,126 @@
+﻿@model DataLayer.Product
+@{
+    ViewData["Title"] = "Next";
+}
+
+    <div class="card m-3 text-right fontiran ">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="ProductId" />
+            <input type="hidden" asp-for="Reduction" />
+            <div class="card-header d-flex justify-content-between">
+                <div >
+                    محصول
+                </div>
+                <div >
+                    <a asp-area="Admin" asp-controller="Products" asp-action="Index" class="btn btn-info">محصولات</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row">
+                    <div class="col-12 col-sm-2">
+                        <label asp-for="CategoryId"></label>
+                    </div>
+                    <div class="col-12 col-sm-10">
+                        <select asp-for="CategoryId" class="form-control bg-light" asp-items="ViewBag.CategoryId"></select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-sm-2">
+                        <label asp-for="Name"></label>
+                    </div>
+                    <div class="col-12 col-sm-10">
+                        <input asp-for="Name" class="form-control bg-light" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-sm-2">
+                        <label asp-for="EnglishName"></label>
+                    </div>
+                    <div class="col-12 col-sm-10">
+                        <input asp-for="EnglishName" class="form-control bg-light" />
+                        <span asp-validation-for="EnglishName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-sm-2">
+                        <label asp-for="Brand"></label>
+                    </div>
+                    <div class="col-12 col-sm-10">
+                        <input asp-for="Brand" class="form-control bg-light" />
+                        <span asp-validation-for="Brand" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-sm-2">
+                        <label asp-for="Price"></label>
+                    </div>
+                    <div class="col-12 col-sm-10">
+                        <input asp-for="Price" class="form-control bg-light" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-sm-2">
+                        <label asp-for="Reduction"></label>
+                    </div>
+                    <div class="col-12 col-sm-10">
+                        <input asp-for="Reduction" class="form-control bg-light" />
+                        <span asp-validation-for="Reduction" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-sm-2">
+                        <label asp-for="IsSpecial"></label>
+                    </div>
+                    <div class="col-12 col-sm-10">
+                        <input asp-for="IsSpecial" type="checkbox" class="form-check-input" />
+                        <span asp-validation-for="IsSpecial" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-sm-2">
+                        <label asp-for="Tags"></label>
+                    </div>
+                    <div class="col-12 col-sm-10">
+                        <input asp-for="Tags" class="form-control bg-light" />
+                        <span asp-validation-for="Tags" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer text-muted">
+                <div class=" row">
+                    <div class="col-12 col-sm-2">
+                        <div class="form-group">
+                            <input type="submit" value="ویرایش" class="btn btn-danger btn-block" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-2">
+                        <div class="form-group">
+                            <a asp-area="Admin" asp-action="PropList" asp-controller="Properties" asp-route-id="@Model.ProductId" class="btn text-black btn-block"style="background-color:#aae000" >ویژگی ها </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-2">
+                        <div class="form-group">
+                            <a asp-area="Admin" asp-action="ColorList" asp-controller="ProductColors" asp-route-id="@Model.ProductId" class="btn text-white btn-block" style="background-color:#250188" >رنگ ها </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-2">
+                        <div class="form-group">
+                            <a asp-area="Admin" asp-action="ImageList" asp-controller="ProductPathImages" asp-route-id="@Model.ProductId" class="btn  btn-block" style="background-color:#ff7840" >عکس ها </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-2">
+                        <div class="form-group">
+                            <a asp-area="Admin" asp-action="Attribute" asp-controller="CreateProductAttribute" asp-route-id="@Model.ProductId" class="btn text-white  btn-block"style="background-color:#4531ba" >مشخصات </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </div>

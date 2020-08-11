@@ -1,0 +1,215 @@
+﻿@model IEnumerable<DataLayer.ShowOrderViewModel>
+@{
+    ViewData["Title"] = "ShowOrder";
+}
+
+
+
+<main class="cart-page default mt-1">
+    @if (Model.Any())
+    {
+        <div class="container">
+            <div class="row">
+                <div class="cart-page-content col-xl-9 col-lg-8 col-md-12 order-1">
+                    <div class="cart-page-title">
+                        <h1>سبد خرید</h1>
+                    </div>
+                    <div class="table-responsive checkout-content default">
+                        <table id="table" class="table">
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="checkout-item col-12">
+                                        <td>
+                                            <img src="/ProductImages/@item.ImageName" alt="" style="max-width:165px">
+                                            <a asp-action="Delete" asp-controller="Orders" asp-route-id="@item.OrderDetailId" class="checkout-btn-remove"></a>
+
+                                        </td>
+                                        <td>
+                                            <h3 class="checkout-title">
+                                                @item.Title
+                                            </h3>
+                                        </td>
+                                        <td>@item.Count عدد</td>
+                                        <td>@item.Price.ToString("#,0 ") تومان</td>
+                                        @if (item.Color != null)
+                                        {
+                                            <td>رنگ @item.Color </td>
+                                        }
+                                        else
+                                        {
+                                            <td>           </td>
+                                        }
+
+                                        <td>
+                                            <a href="/Orders/Command/@item.OrderDetailId?command=up"><img src="~/img/Up.svg" style="height:30px" /></a>
+                                            <a href="/Orders/Command/@item.OrderDetailId?command=down"><img src="~/img/Down.svg" style="height:30px" /></a>
+                                        </td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                        <div id="card">
+                            @foreach (var item in Model)
+                            {
+                                <div class="card text-center">
+                                    <h5 class="card-header">@item.Title</h5>
+                                    <div class="card-body">
+                                        <img src="/ProductImages/@item.ImageName" alt="" style="max-width:165px">
+                                        <p class="card-text">@item.Count عدد</p>
+                                        <p class="card-text">@item.Price.ToString("#,0 ") تومان</p>
+                                        @if (item.Color != null)
+                                        {
+                                            <p class="card-text">رنگ @item.Color</p>
+
+                                        }
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+
+                                        <a href="/Orders/Command/@item.OrderDetailId?command=up" type="button" class="  "><img src="~/img/Up.svg" style="height:20px; " /></a>
+                                        <a asp-action="Delete" asp-controller="Orders" asp-route-id="@item.OrderDetailId" type="button" class="" ><img src="~/img/trash.jpg" style="height:20px; " /></a>
+                                        <a href="/Orders/Command/@item.OrderDetailId?command=down" type="button" class= " "><img src="~/img/Down.svg" style="height:20px;" /></a>
+                                    </div>
+                                       
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <aside class="cart-page-aside col-xl-3 col-lg-4 col-md-6 center-section order-2">
+                    <div class="checkout-aside">
+                        <div class="checkout-summary">
+                            <div class="checkout-summary-main">
+                                <ul class="checkout-summary-summary">
+                                    <li><span>مبلغ کل (۱ کالا)</span><span>@Model.Sum(s => s.Sum).ToString("#,0 تومان")</span></li>
+                                    <li>
+                                        <span>هزینه ارسال</span>
+                                        <span>
+                                            وابسته به آدرس<span class="wiki wiki-holder">
+                                                <span class="wiki-sign"></span>
+                                                <div class="wiki-container js-dk-wiki is-right">
+                                                    <div class="wiki-arrow"></div>
+                                                    <p class="wiki-text">
+                                                        هزینه ارسال مرسولات می‌تواند وابسته به شهر و آدرس گیرنده
+                                                        متفاوت باشد. در
+                                                        صورتی که هر
+                                                        یک از مرسولات حداقل ارزشی برابر با ۱۰۰هزار تومان داشته باشد،
+                                                        آن مرسوله
+                                                        بصورت رایگان
+                                                        ارسال می‌شود.<br>
+                                                        "حداقل ارزش هر مرسوله برای ارسال رایگان، می تواند متغیر
+                                                        باشد."
+                                                    </p>
+                                                </div>
+                                            </span>
+                                        </span>
+                                    </li>
+                                </ul>
+                                <div class="checkout-summary-devider">
+                                    <div></div>
+                                </div>
+                                <div class="checkout-summary-content">
+                                    <div class="checkout-summary-price-title">مبلغ قابل پرداخت:</div>
+                                    <div class="checkout-summary-price-value">
+                                        <span class="checkout-summary-price-value-amount">@Model.Sum(s => s.Sum).ToString("#,0 تومان")</span>
+                                    </div>
+                                    <a href="#" class="selenium-next-step-shipping">
+                                        <div class="parent-btn">
+                                            <a asp-action="Payment" asp-controller="Orders" class="dk-btn dk-btn-info">
+                                                ادامه ثبت سفارش
+                                                <i class="now-ui-icons shopping_basket"></i>
+                                            </a>
+                                        </div>
+                                    </a>
+                                    <div>
+                                        <span>
+                                            کالاهای موجود در سبد شما ثبت و رزرو نشده‌اند، برای ثبت سفارش مراحل بعدی
+                                            را تکمیل
+                                            کنید.
+                                        </span>
+                                        <span class="wiki wiki-holder">
+                                            <span class="wiki-sign"></span>
+                                            <div class="wiki-container is-right">
+                                                <div class="wiki-arrow"></div>
+                                                <p class="wiki-text">
+                                                    محصولات موجود در سبد خرید شما تنها در صورت ثبت و پرداخت سفارش
+                                                    برای شما رزرو
+                                                    می‌شوند. در
+                                                    صورت عدم ثبت سفارش، تاپ کالا هیچگونه مسئولیتی در قبال تغییر
+                                                    قیمت یا موجودی
+                                                    این کالاها
+                                                    ندارد.
+                                                </p>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                        <div class="checkout-feature-aside">
+                            <ul>
+                                <li class="checkout-feature-aside-item checkout-feature-aside-item-guarantee">
+                                    هفت روز
+                                    ضمانت تعویض
+                                </li>
+                                <li class="checkout-feature-aside-item checkout-feature-aside-item-cash">
+                                    پرداخت در محل با
+                                    کارت بانکی
+                                </li>
+                                <li class="checkout-feature-aside-item checkout-feature-aside-item-express">
+                                    تحویل اکسپرس
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container text-center">
+            <div class="cart-empty">
+                <div class="cart-empty-icon">
+                    <i class="now-ui-icons shopping_basket"></i>
+                </div>
+                <div class="cart-empty-title">سبد خرید شما خالیست!</div>
+
+            </div>
+        </div>
+    }
+</main>
+
+@section Scripts
+{
+
+    <script>
+        $(document).ready(function () {
+            // Optimalisation: Store the references outside the event handler:
+            var $window = $(window);
+            
+            function checkWidth() {
+                var windowsize = $window.width();
+                if (windowsize > 600) {
+
+                    $("#table").show();
+                    $("#card").hide();
+                }
+                else {
+                     $("#table").hide();
+                    $("#card").show();
+                }
+            }
+            // Execute on load
+            checkWidth();
+            // Bind event listener
+            $(window).resize(checkWidth);
+        });
+    </script>
+
+}

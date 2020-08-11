@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DataLayer.Category>
+
+
+@if (Model.Count() != 0)
+{
+    @foreach (var item in Model)
+    {
+
+        <div class="row">
+            <input type="checkbox" id="myCheck_@item.CategoryId" value="@item.CategoryId" onclick="myFunction(@item.CategoryId)" />
+            <label class="">@item.Name</label>
+        </div>
+
+
+    }
+
+}
+else
+{
+    <div class="row">
+        <input id="chekbox" type="checkbox" />
+
+        <label>@ViewBag.Filter</label>
+
+    </div>
+}
+
+
+
+<style>
+
+    input[type="checkbox"]:checked {
+        width: 20px;
+        height: 20px;
+    }
+
+    input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        margin-left: 8px;
+    }
+</style>
+
+@section Scripts {
+
+    <script>
+
+
+       
+
+    </script>
+}

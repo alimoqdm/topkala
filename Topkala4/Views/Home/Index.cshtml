@@ -1,0 +1,245 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="row">
+        <aside class="sidebar col-12 col-lg-3 order-2 order-lg-1">
+            <div class="sidebar-inner default">
+                <div class="widget-banner widget card d-none d-sm-block">
+                    <a href="#" target="_top">
+                        <img class="img-fluid" src="/img/banner/1455.jpg" alt="">
+                    </a>
+                </div>
+                <div class="widget-services widget card">
+                    <div class="row">
+                        <div class="feature-item col-12">
+                            <a href="#" target="_blank">
+                                <img src="/img/svg/return-policy.svg">
+                            </a>
+                            <p>ضمانت برگشت</p>
+                        </div>
+                        <div class="feature-item col-6">
+                            <a href="#" target="_blank">
+                                <img src="/img/svg/payment-terms.svg">
+                            </a>
+                            <p>پرداخت درمحل</p>
+                        </div>
+                        <div class="feature-item col-6">
+                            <a href="#" target="_blank">
+                                <img src="/img/svg/delivery.svg">
+                            </a>
+                            <p>تحویل اکسپرس</p>
+                        </div>
+                        <div class="feature-item col-6">
+                            <a href="#" target="_blank">
+                                <img src="/img/svg/origin-guarantee.svg">
+                            </a>
+                            <p>تضمین بهترین قیمت</p>
+                        </div>
+                        <div class="feature-item col-6">
+                            <a href="#" target="_blank">
+                                <img src="/img/svg/contact-us.svg">
+                            </a>
+                            <p>پشتیبانی 24 ساعته</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-suggestion widget card">
+                    <header class="card-header">
+                        <h3 class="card-title">پیشنهاد لحظه ای</h3>
+                    </header>
+                    <div id="progressBar">
+                        <div class="slide-progress"></div>
+                    </div>
+                    <div id="suggestion-slider" class="owl-carousel owl-theme">
+                        @await Component.InvokeAsync("InstantOffer")
+                      
+                     
+                   
+                    </div>
+                </div>
+                <div class="widget-banner widget card d-none d-sm-block">
+                    <a href="#" target="_blank">
+                        <img class="img-fluid" src="/img/banner/1000001422.jpg" alt="">
+                    </a>
+                </div>
+                <div class="widget-banner widget card d-none d-sm-block">
+                    <a href="#" target="_blank">
+                        <img class="img-fluid" src="/img/banner/side-banner-01.jpeg" alt="">
+                    </a>
+                </div>
+                <div class="widget-banner widget card d-none d-sm-block">
+                    <a href="#" target="_top">
+                        <img class="img-fluid" src="/img/banner/1000001322.jpg" alt="">
+                    </a>
+                </div>
+                <div class="widget-banner widget card d-none d-sm-block">
+                    <a href="#" target="_blank">
+                        <img class="img-fluid" src="/img/banner/1000001442.jpg" alt="">
+                    </a>
+                </div>
+                <div class="widget-banner widget card d-none d-sm-block ">
+                    <a href="#" target="_blank">
+                        <img class="img-fluid"
+                             src="/img/banner/8d546388-29d7-4733-871f-2d84a3012cc227_21_1_6.jpeg"
+                             alt="">
+                    </a>
+                </div>
+             
+            </div>
+        </aside>
+        <div class="col-12 col-lg-9 order-1 order-lg-2">
+            <section id="main-slider" class="carousel slide carousel-fade card" data-ride="carousel">
+             
+                @await Component.InvokeAsync("SilderComponent")
+            </section>
+            <section id="amazing-slider" class="carousel slide carousel-fade card" data-ride="carousel">
+                @await Component.InvokeAsync("AmazingSliderComponent")
+              
+            </section>
+          @await Component.InvokeAsync("ResponsiveSliderComponent")
+            <div class="row banner-ads">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6 col-lg-3">
+                            <div class="widget-banner card">
+                                <a href="#" target="_blank">
+                                    <img class="img-fluid" src="/img/banner/banner-1.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="widget-banner card">
+                                <a href="#" target="_top">
+                                    <img class="img-fluid" src="/img/banner/banner-2.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="widget-banner card">
+                                <a href="#" target="_top">
+                                    <img class="img-fluid" src="/img/banner/banner-3.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="widget-banner card">
+                                <a href="#" target="_top">
+                                    <img class="img-fluid" src="/img/banner/banner-4.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="widget widget-product card">
+                        <header class="card-header">
+                            <h3 class="card-title">
+                                <span>آیفون</span>
+                            </h3>
+                            <a href="#" class="view-all">مشاهده همه</a>
+                        </header>
+                        <div class="product-carousel owl-carousel owl-theme">
+                          @await Component.InvokeAsync("ProductComponent",new { CatName="آیفون"})
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="widget widget-product card">
+                        <header class="card-header">
+                            <h3 class="card-title">
+                                <span>سامسونگ</span>
+                            </h3>
+                            <a href="#" class="view-all">مشاهده همه</a>
+                        </header>
+                        <div class="product-carousel owl-carousel owl-theme">
+                            @await Component.InvokeAsync("ProductComponent", new { CatName = "سامسونگ" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row banner-ads">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <div class="widget-banner card">
+                                <a href="#" target="_blank">
+                                    <img class="img-fluid" src="/img/banner/banner-9.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="widget-banner card">
+                                <a href="#" target="_top">
+                                    <img class="img-fluid" src="/img/banner/banner-10.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="widget widget-product card">
+                        <header class="card-header">
+                            <h3 class="card-title">
+                                <span>لپتاپ</span>
+                            </h3>
+                            <a href="#" class="view-all">مشاهده همه</a>
+                        </header>
+                        <div class="product-carousel owl-carousel owl-theme">
+                            @await Component.InvokeAsync("ProductComponent", new { CatName = "لپتاپ" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="widget widget-product card">
+                        <header class="card-header">
+                            <h3 class="card-title">
+                                <span>هدفون، هدست و هندزفری</span>
+                            </h3>
+                            <a href="#" class="view-all">مشاهده همه</a>
+                        </header>
+                        <div class="product-carousel owl-carousel owl-theme">
+                            @await Component.InvokeAsync("ProductComponent", new { CatName = "هدفون، هدست و هندزفری" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row banner-ads">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="widget widget-banner card">
+                                <a href="#" target="_blank">
+                                    <img class="img-fluid" src="/img/banner/banner-11.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="widget widget-product card">
+                        <header class="card-header">
+                            <h3 class="card-title">
+                                <span>ساعت هوشمند</span>
+                            </h3>
+                            <a href="#" class="view-all">مشاهده همه</a>
+                        </header>
+                        <div class="product-carousel owl-carousel owl-theme">
+                            @await Component.InvokeAsync("ProductComponent", new { CatName = "ساعت هوشمند" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   

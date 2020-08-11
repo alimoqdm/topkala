@@ -1,0 +1,99 @@
+﻿@model DataLayer.Attributee
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div class="card m-3 text-right fontiran ">
+    <form asp-action="Create">
+
+        <div class="card-header">
+            ایجاد ویژکی
+        </div>
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group row">
+                <div class="col-12 col-lg-2">
+                    <label> دسته </label>
+                </div>
+                <div class="col-12 col-lg-10">
+                    <select class="form-control" asp-items="ViewBag.CategoryId" id="Categorylist">
+                        <option>انتخاب </option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12 col-lg-2">
+                    <label> گروه ویژگی </label>
+                </div>
+                <div class="col-12 col-lg-10">
+                    <select asp-for="AttributeGroupId" class="form-control" id="Attributelist">
+                        <option> </option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12 col-lg-2">
+                    <label asp-for="title"></label>
+                </div>
+                <div class="col-12 col-lg-10">
+                    <input asp-for="title" class="form-control" />
+                    <span asp-validation-for="title" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer text-muted">
+            <div class=" row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary btn-block" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <a asp-action="Index" class="btn btn-success btn-block">Back </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+
+
+
+    <script type="text/javascript">
+        //Insert default item "Select" in dropdownlist on load
+        $(document).ready(function () {
+            var items = "<option value='0'>انتخاب</option>";
+            $("#Attributelist").html(items);
+        });
+
+        //Bind City dropdownlist
+        $("#Categorylist").change(function () {
+            var CategoryId = $("#Categorylist").val();
+            var url = "/Admin/Attributees/GetAttrList";
+
+            $.getJSON(url, { CountryId: CategoryId }, function (data) {
+                var item = "";
+                $("#Attributelist").empty();
+                $.each(data, function (i, attr) {
+                    item += '<option value="' + attr.value + '">' + attr.text + '</option>'
+                });
+                $("#Attributelist").html(item);
+            });
+        });
+    </script>
+}

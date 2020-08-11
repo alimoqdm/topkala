@@ -1,0 +1,24 @@
+﻿@model IEnumerable<DataLayer.Comment>
+@using TopKala3;
+
+@foreach (var item in Model)
+{
+    <li>
+        <div class="comment-body">
+            <div class="comment-author">
+                <img alt="" src="/img/default-avatar.png" class="avatar"><cite class="fn">@item.Name</cite>
+                <span class="says">گفت:</span>
+            </div>
+
+            <div class="commentmetadata">
+                <a href="#">
+                    @item.CreatDate.ToShamsi()
+                </a>
+            </div>
+
+            <p>@item.Text</p>
+
+           
+        </div>
+    </li>
+}

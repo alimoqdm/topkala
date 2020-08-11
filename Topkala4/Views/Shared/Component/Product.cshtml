@@ -1,0 +1,30 @@
+﻿@model IEnumerable<DataLayer.AmazingSliderViewModel>
+
+@foreach (var item in Model)
+{
+    <div class="item">
+        <a asp-area="" asp-action="Product" asp-controller="Product" asp-route-id="@item.ProductID" asp-route-Name="@item.Name"
+                                                       asp-route-Parent="@item.Parent" asp-route-Grand="@item.Grand">
+            <img src="~/ProductImages/@item.ProductImage"
+                 class="img-fluid" alt="">
+        </a>
+        <h2 class="post-title">
+            <a asp-area="" asp-action="Product" asp-controller="Product" asp-route-id="@item.ProductID" asp-route-Name="@item.Name"
+                                                       asp-route-Parent="@item.Parent" asp-route-Grand="@item.Grand">@item.ProductName</a>
+        </h2>
+        <div class="price">
+            @if (item.special)
+            {
+                <del><span>@item.ProductPrice.ToString("0,#")<span>تومان</span></span></del>
+                <span>@item.PriceReduction.ToString("0,#")<span>تومان</span></span>
+            }
+            else
+            {
+
+
+                <span class="amount">@item.ProductPrice.ToString("0,#")<span>تومان</span></span>
+
+            }
+        </div>
+    </div>
+}

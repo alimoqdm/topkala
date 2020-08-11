@@ -1,0 +1,98 @@
+﻿@model IEnumerable<DataLayer.Attributee>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="row m-2 px-1 py-4 border backgroundWhite" dir="ltr">
+    <div class="col-lg-12 mb-4">
+        <div class=" text-right">
+            <a asp-action="Create" class="btn btn-primary fontiran"><i class="fas fa-plus"></i> &nbsp; ایجاد ویژگی</a>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-12">
+        <table class="table table-striped  table-bordered fontiran  dt-responsive nowrap" width="100%" dir="rtl" id="myTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.attibuteGroup)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.title)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.attibuteGroup.title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.title)
+                    </td>
+                    <td>
+                        <a class="btn " asp-action="Edit" asp-route-id="@item.AttributeId" style="background-color:#ff7840"><i class='far fa-edit'></i> </a>
+
+                        <a class="btn text-white" onclick="Delete(@item.AttributeId)" style="background-color:#4531ba">    <i class='far fa-trash-alt'></i> </a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+
+        function Delete(id) {
+            swal({
+
+                title: "Are you sure you want to delete",
+
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes",
+                closeOnconfirm: true,
+
+            }, function () {
+                $.ajax({
+                    type: 'DELETE',
+                    url: "/Admin/Attributees/Delete/" + id,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.success) {
+                            toastr.success(data.message);
+                            setTimeout(function () { location.reload(); }, 100);
+
+
+
+                        }
+                        else {
+                            toastr.error(data.message);
+                        }
+                    },
+                    error: function (error) {
+                        toastr.error("U cant delet this ");
+
+                    }
+
+                });
+            });
+        }
+
+
+
+    </script>
+
+}

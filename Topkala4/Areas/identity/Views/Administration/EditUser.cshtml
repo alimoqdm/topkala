@@ -1,0 +1,72 @@
+﻿@model EditUserViewModel
+
+@{
+    ViewBag.Title = "Edit User";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card m-3 p-3 text-right fontiran ">
+    <form method="post" class="mt-3">
+        <div class="form-group row">
+            <div class="col-12 col-lg-2">
+                <label>ایدی</label>
+            </div>
+            <div class="col-12 col-lg-10">
+                <input asp-for="Id" disabled class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-12 col-lg-2">
+                <label>ایمیل</label>
+            </div>
+            <div class="col-12 col-lg-10">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12 col-lg-2">
+                <label>نام</label>
+            </div>
+            <div class="col-12 col-lg-10">
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">بروز رسانی</button>
+                <a asp-action="ListUsers" class="btn btn-primary">برگشت</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5>نقش های کاربر</h5>
+            </div>
+            <div class="card-body">
+                @if (Model.Roles.Any())
+                {
+                    foreach (var role in Model.Roles)
+                    {
+                        <h6 class="card-title">@role</h6>
+                    }
+                }
+                else
+                {
+                 <h6 class="card-title">نقشی وجود ندار</h6>
+                }
+              
+            </div>
+            <div class="card-footer">
+                <a asp-action="ManageUserRoles" asp-route-userId="@Model.Id" class="btn btn-primary" style="width:auto">مدیریت نقش</a>
+            </div>
+        </div>
+    </form>
+
+</div>

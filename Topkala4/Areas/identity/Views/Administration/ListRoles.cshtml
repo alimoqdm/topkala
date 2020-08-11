@@ -1,0 +1,101 @@
+﻿@model IEnumerable<IdentityRole>
+
+@using Microsoft.AspNetCore.Authorization
+
+@inject IAuthorizationService authorizationService
+
+@{
+    ViewBag.Title = "All Roles";
+      Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="card m-3 text-right fontiran">
+      
+
+            <div class="card-header text-white" style="background-color:#1E1B30">
+                نقش های کاربران
+            </div>
+            <div class="card-body">
+                @if (Model.Any())
+                {
+                    <a class="btn text-white  mb-3 mt-3" style="width:auto;background-color:#1E1B30" asp-action="CreateRole"
+                       asp-controller="administration">ایجاد نقش</a>
+
+                    foreach (var role in Model)
+                    {
+                        <div class="card mb-3">
+                            <div class="card-header "  >
+                               ایدی : @role.Id
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@role.Name</h5>
+                            </div>
+                            <div  class="m-2">
+                                <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+
+
+                                    <a class="btn text-white " style="background-color:#BB509E" asp-action="EditRole"
+                                       asp-controller="Administration" asp-route-id="@role.Id">
+                                       ویرایش
+                                    </a>
+
+                                    <span id="confirmDeleteSpan_@role.Id" style="display:none">
+                                        <span class="mx-1">آیا مطمعن هستید میخواهید حذف کنید؟</span>
+                                        <button type="submit" class="btn btn-danger">بله</button>
+                                        <a href="#" class="btn btn-primary"
+                                           onclick="confirmDelete('@role.Id', false)">خیر</a>
+                                    </span>
+
+                                    <span id="deleteSpan_@role.Id">
+                                        <a href="#" class="btn text-white "
+                                           onclick="confirmDelete('@role.Id', true)" style="background-color:#F31345">حذف</a>
+                                    </span>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="card">
+                        <div class="card-header">
+                            No roles created yet
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Use the button below to create a role
+                            </h5>
+                            <a class="btn btn-primary" style="width:auto"
+                               asp-controller="administration" asp-action="CreateRole">
+                                Create Role
+                            </a>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        
+
+       
+    </div>
+
+
+
+@section Scripts {
+    <script>
+
+        function confirmDelete(uniqueId, isDeleteClicked) {
+            var deleteSpan = 'deleteSpan_' + uniqueId;
+            var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+
+            if (isDeleteClicked) {
+                $('#' + deleteSpan).hide();
+                $('#' + confirmDeleteSpan).show();
+            } else {
+                $('#' + deleteSpan).show();
+                $('#' + confirmDeleteSpan).hide();
+            }
+        }
+
+    </script>
+}

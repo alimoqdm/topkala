@@ -1,0 +1,20 @@
+﻿@using Microsoft.Extensions.Configuration;
+@model DataLayer.EmailLink
+
+@inject IConfiguration configuration
+@{
+    Layout = null;
+
+ 
+}
+
+<div style="direction: rtl; padding: 20px">
+    <h2> دوست عزیز !</h2>
+    <p>دوست عزیز برای تغییر دادن رمز خود روی لینک زیر کلیک نمایید</p>
+    <p>
+
+        <a class="btn btn-danger" href="@Model.ConfirmLink">تغییر </a>
+    </p>
+    <hr />
+
+</div>

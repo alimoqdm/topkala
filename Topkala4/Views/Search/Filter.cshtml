@@ -1,0 +1,349 @@
+﻿@model IEnumerable<DataLayer.SearchViewModel>
+@{
+    ViewData["Title"] = "SearchProduct";
+    int id = ViewBag.Id;
+}
+<div id="SerachAjax">
+    <main class="">
+        <div class="container">
+            <div class="row">
+                <aside class="sidebar-page col-12 col-sm-12 col-md-4 col-lg-3 order-1 hiid">
+                    <div class="box">
+                        <div class="box-header">جستجو در نتایج:</div>
+                        <div class="box-content">
+                            <div class="ui-input ui-input--quick-search">
+                                <input type="text" class="ui-input-field ui-input-field--cleanable"
+                                       placeholder="نام محصول یا برند مورد نظر را بنویسید…">
+                                <span class="ui-input-cleaner"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="box-toggle" data-toggle="collapse" href="#collapseExample1" role="button"
+                                 aria-expanded="true" aria-controls="collapseExample1">
+                                دسته بندی نتایج
+                                <i class="now-ui-icons arrows-1_minimal-down"></i>
+                            </div>
+                        </div>
+                        <div class="box-content">
+                            <div class="collapse show" id="collapseExample1">
+
+                                <div class="filter-option">
+                                    @await Component.InvokeAsync("FilterCategoryComponent", new { id = ViewBag.Idd })
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="box-content row mr-1">
+                            <input type="checkbox" id="NoProduct" name="checkbox1" onclick="NoProduct()" !checked />
+                            <label for="checkbox1">فقط کالاهای موجود</label>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content row mr-1">
+                            <input type="checkbox" id="NoSend" name="checkbox" onclick="NoSend()" />
+                            <label for="checkbox">فقط کالاهای آماده ارسال</label>
+                        </div>
+                    </div>
+
+
+
+                </aside>
+                <div class="col-12 col-sm-12 col-md-8 col-lg-9 order-2">
+                    <div class="breadcrumb-section default">
+                        <ul class="breadcrumb-list">
+                            <li>
+                                <a href="#">
+                                    <span>فروشگاه اینترنتی تاپ کالا</span>
+                                </a>
+                            </li>
+                            <li><span>جستجوی  @ViewBag.Name</span></li>
+                        </ul>
+                    </div>
+                    <div class="listing default">
+                        <div class="listing-counter">@ViewBag.Count کالا</div>
+                        <div class="listing-header default">
+                            <ul class="listing-sort nav nav-tabs justify-content-center" role="tablist"
+                                data-label="مرتب‌سازی بر اساس :">
+                                <li>
+                                    <a id="Normal" onclick="SortBtn('Normal')"
+                                       aria-expanded="false" style="cursor:pointer">‌عادی</a>
+                                </li>
+                                <li>
+                                    <a id="Visit" onclick="SortBtn('Visit')"
+                                       aria-expanded="false" style="cursor:pointer">پربازدیدترین</a>
+                                </li>
+                                <li>
+                                    <a id="New" onclick="SortBtn('New')" aria-expanded="true" style="cursor:pointer">جدیدترین</a>
+                                </li>
+
+                                <li>
+                                    <a id="Low" onclick="SortBtn('Low')"
+                                       aria-expanded="false" style="cursor:pointer">ارزان‌ترین</a>
+                                </li>
+                                <li>
+                                    <a id="High" onclick="SortBtn('High')"
+                                       aria-expanded="false" style="cursor:pointer">گران‌ترین</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content default text-center">
+                            <div class="tab-pane active" id="related" role="tabpanel" aria-expanded="true">
+                                <div class="container no-padding-right">
+                                    <ul class="row listing-items">
+                                        @foreach (var item in Model)
+                                        {
+
+                                        <li class="col-xl-3 col-lg-4 col-md-6 col-12 no-padding">
+                                            @if (item.special)
+                                            {
+                                                <div class="label-check"> ویژه</div>
+                                            }
+                                            <div class="product-box">
+                                                <div class="product-seller-details product-seller-details-item-grid">
+                                                    <span class="product-main-seller">
+                                                        <span class="product-seller-details-label">
+                                                            فروشنده:
+                                                        </span>تاپ کالا
+                                                    </span>
+                                                    <span class="product-seller-details-badge-container"></span>
+                                                </div>
+                                                <a class="product-box-img" asp-action="Product" asp-controller="Product" asp-route-id="@item.ProductID" asp-route-Name="@item.CategoryName"
+                                                   asp-route-Parent="@item.CategoryParentName" asp-route-Grand="@item.CategoryGrandParentName">
+                                                    <img src="~/ProductImages/@item.ProductImage" alt="">
+                                                </a>
+                                                <div class="product-box-content">
+                                                    <div class="product-box-content-row">
+                                                        <div class="product-box-title">
+                                                            <a asp-action="Product" asp-controller="Product" asp-route-id="@item.ProductID" asp-route-Name="@item.CategoryName"
+                                                               asp-route-Parent="@item.CategoryParentName" asp-route-Grand="@item.CategoryGrandParentName">
+                                                                @item.ProductName
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-box-row product-box-row-price">
+                                                        <div class="price">
+                                                            <div class="price-value">
+                                                                @if (item.special)
+                                                                {
+                                                                    <div class="price-value-wrapper">
+                                                                        @item.PriceReduction.ToString("0,#") <span class="price-currency">تومان</span>
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="price-value-wrapper">
+                                                                        @item.ProductPrice.ToString("0,#") <span class="price-currency">تومان</span>
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        }
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pager default text-center">
+                            <ul class="pager-items">
+                                @for (int i = 1; i <= (ViewBag.PageCount + 1); i++)
+                                {
+                                    <li>
+                                        <a class="pager-item  @(((int)ViewBag.PageID==i)?"is-active":"")" href="/Search/@ViewBag.Id/@ViewBag.Name/?pageid=@i">@i</a>
+                                    </li>
+                                }
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</div>
+@section Scripts
+{
+    <script>
+
+        function myFunction(uniqueId) {
+
+            var Chek = "myCheck_" + uniqueId;
+            var checkBox = document.getElementById(Chek);
+            var id = $('#' + Chek).val();
+
+            if ($(checkBox).prop("checked", true)) {
+
+                $.ajax({
+                    url: '/Filter/' + id,
+                    type: 'Get',
+
+                }).done(function (res) {
+                       $("#SerachAjax").html(res);
+                });
+
+            }
+
+
+
+        }
+
+     function SortBtn(x) {
+
+         if (x == 'Normal') {
+
+             $.ajax({
+                 url:'/Search/Sort/'+@ViewBag.Id,
+                 type: 'GET',
+                 data: { SortOrder: 'Normal' },
+
+
+             }).done(function (res) {
+
+                 $("#SerachAjax").html(res);
+                  $("#Normal").addClass("active");
+             $("#Visit").removeClass("active");
+             $("#New").removeClass("active");
+             $("#Seller").removeClass("active");
+             $("#Low").removeClass("active");
+             $("#High").removeClass("active");
+
+             });
+         }
+
+         if (x == 'Visit') {
+
+             $.ajax({
+                 url:'/Search/Sort/'+@ViewBag.Id,
+                 type: 'GET',
+                 data: { SortOrder: 'Visit' },
+
+
+             }).done(function (res) {
+
+                 $("#SerachAjax").html(res);
+                       $("#Normal").removeClass("active");
+             $("#Visit").addClass("active");
+             $("#New").removeClass("active");
+
+             $("#Low").removeClass("active");
+             $("#High").removeClass("active");
+             });
+         }
+
+         if (x == 'Low') {
+
+             $.ajax({
+                 url:'/Search/Sort/'+@ViewBag.Id,
+                 type: 'GET',
+                 data: { SortOrder: 'Low' },
+
+
+             }).done(function (res) {
+
+                 $("#SerachAjax").html(res);
+             $("#Normal").removeClass("active");
+             $("#Visit").removeClass("active");
+             $("#New").removeClass("active");
+
+             $("#Low").addClass("active");
+             $("#High").removeClass("active");
+             });
+         }
+
+          if (x == 'High') {
+
+             $.ajax({
+                 url:'/Search/Sort/'+@ViewBag.Id,
+                 type: 'GET',
+                 data: { SortOrder: 'High' },
+
+
+             }).done(function (res) {
+
+                 $("#SerachAjax").html(res);
+             $("#Normal").removeClass("active");
+             $("#Visit").removeClass("active");
+             $("#New").removeClass("active");
+
+             $("#Low").removeClass("active");
+             $("#High").addClass("active");
+             });
+         }
+
+          if (x == 'New') {
+
+             $.ajax({
+                 url:'/Search/Sort/'+@ViewBag.Id,
+                 type: 'GET',
+                 data: { SortOrder: 'New' },
+
+
+             }).done(function (res) {
+                 console.log(res);
+                 $("#SerachAjax").html(res);
+             $("#Normal").removeClass("active");
+             $("#Visit").removeClass("active");
+             $("#New").addClass("active");
+
+             $("#Low").removeClass("active");
+             $("#High").removeClass("active");
+             });
+         }
+     }
+
+
+
+
+
+              function NoProduct() {
+
+              var checkBox = document.getElementById("NoProduct");
+
+            if ($(checkBox).prop("checked", true)) {
+
+                  $.ajax({
+
+                url: '/NoProduct',
+                type: 'GET'
+            }).done(function (res) {
+                $("#SerachAjax").html(res);
+            });
+            }
+
+        }
+
+
+        function NoSend() {
+              var checkBox = document.getElementById("NoSend");
+
+            if ($(checkBox).prop("checked", true)) {
+
+                  $.ajax({
+
+                url: '/NoSendProduct',
+                type: 'GET'
+            }).done(function (res) {
+                $("#SerachAjax").html(res);
+            });
+            }
+        }
+
+
+
+
+
+    </script>
+}

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<DataLayer.SilderImage>
+
+    <ol class="carousel-indicators">
+        @for (int i=0; i< Model.Count();i++)
+        {
+            <li data-target="#main-slider" data-slide-to="@i" class="active"></li>
+        }
+
+
+    </ol>
+<div class="carousel-inner">
+    @foreach (var item in Model)
+    {
+
+
+        <div class="carousel-item @(item == Model.First() ? "active" : "") ">
+            <a class="d-block" href="/Search/@item.CategoryId">
+                <img src="~/SliderImages/@item.Image" asp-append-version="true"
+                     class="d-block w-100 hhh " alt="">
+            </a>
+        </div>
+}
+
+</div>
+<a class="carousel-control-prev" href="#main-slider" role="button" data-slide="prev">
+    <i class="now-ui-icons arrows-1_minimal-right"></i>
+</a>
+<a class="carousel-control-next" href="#main-slider" data-slide="next">
+    <i class="now-ui-icons arrows-1_minimal-left"></i>
+</a>
+
+
+<style>
+    .hhh
+    {
+        max-height:400px !important;
+    }
+
+   
+</style>
