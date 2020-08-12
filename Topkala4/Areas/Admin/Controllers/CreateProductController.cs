@@ -32,7 +32,7 @@ namespace TopKala3.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Name,Brand,Price,PriceWithReduction,Reduction,IsSpecial,Seller,Tags,Review,Visit,CountSell,CreatDateTime,CategoryId,EnglishName")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,Name,Price,PriceWithReduction,Reduction,IsSpecial,Seller,Tags,Review,Visit,CountSell,CreatDateTime,CategoryId,BrandId,EnglishName")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -55,14 +55,14 @@ namespace TopKala3.Areas.Admin.Controllers
         public IActionResult Next(int id)
         {
 
-            var product = _db.Products.Find(id);
+            var product = _db.Products.Include(a=>a.Brands).SingleOrDefault(p=>p.ProductId==id);
             ViewData["CategoryId"] = new SelectList(_db.Categories, "CategoryId", "Name", product.CategoryId);
             return View(product);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("ProductId,Name,Brand,Price,PriceWithReduction,Reduction,IsSpecial,Seller,Tags,Review,Visit,CountSell,CreatDateTime,CategoryId,EnglishName")] Product product)
+        public async Task<IActionResult> Edit([Bind("ProductId,Name,Brand,Price,PriceWithReduction,Reduction,IsSpecial,Seller,Tags,Review,Visit,CountSell,CreatDateTime,CategoryId,BrandId,EnglishName")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -108,11 +108,27 @@ namespace TopKala3.Areas.Admin.Controllers
         }
 
 
+        [HttpGet]
+        public JsonResult GetBrands(int CountryId)
+        {
+            var Brands = new SelectList(_db.Brands.Where(c => c.CategoryId == CountryId), "BrandId", "Value");
+            return Json(Brands);
+
+        }
+
+        [HttpGet]
+        public JsonResult BrandsEdit(int CountryId)
+        {
+            var Brands = new SelectList(_db.Brands.Where(c => c.CategoryId == CountryId), "BrandId", "Value");
+            return Json(Brands);
+
+        }
 
 
 
 
-       
+
+
 
 
 

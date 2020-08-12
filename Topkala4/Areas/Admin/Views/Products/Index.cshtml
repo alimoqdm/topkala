@@ -23,7 +23,7 @@
                             </th>
                           
                             <th>
-                                @Html.DisplayNameFor(model => model.Brand)
+                                @Html.DisplayNameFor(model => model.Brands.Value)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Price)
@@ -54,7 +54,15 @@
                             </td>
                          
                             <td>
-                                @Html.DisplayFor(modelItem => item.Brand)
+                                @if (item.BrandId != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.Brands.Value)
+                                }
+                                else
+                                {
+                                <p>متفرقه</p> 
+                                }
+
                             </td>
                             <td>
                                 @item.Price.ToString("0,# تومان")

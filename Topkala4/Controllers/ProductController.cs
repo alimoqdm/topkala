@@ -30,13 +30,13 @@ namespace TopKala3.Controllers
             ViewBag.Grand = Grand;
 
             var Product1 = await _db.Products.Include(a => a.productPathImages).Include(a => a.productColors)
-              
+                .Include(a => a.Brands)
                 .Include(a => a.properties)
                 .Include(a => a.productAttributes)
                 .Include(a => a.Category)
                 .Include(a => a.comments)
                 .Include(a => a.productAttributes)
-
+              
                 .ThenInclude(a => a.attribute)
                 .ThenInclude(a => a.attibuteGroup)
                 
@@ -59,7 +59,7 @@ namespace TopKala3.Controllers
                 Review = Product1.Review,
                 Reduction = Product1.Reduction,
                 Category = Product1.Category.Name,
-                Brand = Product1.Brand,
+                Brand = Product1.BrandId == null ? "متفرقه" : Product1.Brands.Value,
                 FristImage = frist,
                 Colors = Colors,
                 Images = images,
@@ -113,6 +113,7 @@ namespace TopKala3.Controllers
             ViewBag.Name = Name;
             ViewBag.Color = Color;
             var Product1 = await _db.Products.Include(a => a.productPathImages).Include(a => a.productColors)
+                 .Include(a => a.Brands)
                 .Include(a => a.properties)
                 .Include(a => a.productAttributes)
                 .Include(a => a.Category)
@@ -138,7 +139,7 @@ namespace TopKala3.Controllers
                 Review = Product1.Review,
                 Reduction = Product1.Reduction,
                 Category = Product1.Category.Name,
-                Brand = Product1.Brand,
+                Brand = Product1.BrandId == null ? "متفرقه" : Product1.Brands.Value,
                 FristImage = frist,
               
                 Images = images,

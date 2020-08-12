@@ -17,8 +17,21 @@
                     <label asp-for="CategoryId"></label>
                 </div>
                 <div class="col-12 col-sm-10">
-                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId" id="CategoryList">
+                        <option>انتخاب </option>
+                    </select>
                     <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12 col-lg-2">
+                    <label> برند </label>
+                </div>
+                <div class="col-12 col-lg-10">
+                    <select asp-for="BrandId" class="form-control" id="BrandList">
+                        <option> </option>
+                    </select>
+
                 </div>
             </div>
             <div class="form-group row">
@@ -39,15 +52,7 @@
                     <span asp-validation-for="EnglishName" class="text-danger"></span>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="col-12 col-sm-2">
-                    <label asp-for="Brand"></label>
-                </div>
-                <div class="col-12 col-sm-10">
-                    <input asp-for="Brand" class="form-control" />
-                    <span asp-validation-for="Brand" class="text-danger"></span>
-                </div>
-            </div>
+          
             <div class="form-group row">
                 <div class="col-12 col-sm-2">
                     <label asp-for="Price"></label>
@@ -121,6 +126,30 @@
         $(function () {
             $("#Review").ckeditor();
         })
+    </script>
+
+
+    <script type="text/javascript">
+        //Insert default item "Select" in dropdownlist on load
+        $(document).ready(function () {
+            var items = "<option value='0'>انتخاب</option>";
+            $("#BrandList").html(items);
+        });
+
+        //Bind City dropdownlist
+        $("#CategoryList").change(function () {
+            var CategoryId = $("#CategoryList").val();
+            var url = "/Admin/CreateProduct/GetBrands";
+
+            $.getJSON(url, { CountryId: CategoryId }, function (data) {
+                var item = "<option >انتخاب</option>";
+                $("#BrandList").empty();
+                $.each(data, function (i, attr) {
+                    item += '<option value="' + attr.value + '">' + attr.text + '</option>'
+                });
+                $("#BrandList").html(item);
+            });
+        });
     </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

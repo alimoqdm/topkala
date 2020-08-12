@@ -24,7 +24,7 @@ namespace TopKala2.Areas.Admin.Controllers
         // GET: Admin/Products
         public async Task<IActionResult> Index()
         {
-            var topKalaContext2 = _context.Products.Include(p => p.Category);
+            var topKalaContext2 = _context.Products.Include(p => p.Category).Include(p => p.Brands);
             return View(await topKalaContext2.ToListAsync());
         }
 
